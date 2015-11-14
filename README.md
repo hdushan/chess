@@ -29,7 +29,9 @@ A console chess application.
 ####Run Unit tests:
 
 - `rake unit` *runs unit tests*
+Once tests complete, coverage report is created at coverage/index.html
 
-####Run the app from command line:
+
+####Run the application from command line:
 
 - `ruby chess.rb`
