@@ -22,14 +22,13 @@ A console chess application.
 ####Folders and files:
 
 - `chess.rb` *this is the main ruby script for the app*
-- `\spec` *this is where the logic lives*
+- `\lib` *this is where the logic lives*
 - `\spec` *this is where unit tests are*
 
 
 ####Run Unit tests:
 
 - `rake unit` *runs unit tests*
-Once tests are run, test coverage can be viewed at:
 
 ####Run the app from command line:
 
