@@ -1,4 +1,5 @@
 $: << './lib'
+$: << '../lib'
 require 'userInputGetter'
 require 'chessBoard'
 require 'chessPiece'
