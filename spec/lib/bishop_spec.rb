@@ -292,7 +292,7 @@ describe Bishop do
                                                                "F4", "G3", "H2")
     end
     
-    it 'should return legal cells when in middle of board surrounded by same colured pieces on he board' do
+    it 'should return legal cells when in middle of board surrounded by same colured pieces on the board' do
       chessboard.place(bishop, "E5")
       chessboard.place(Knight.new("W"), "F6")
       chessboard.place(Knight.new("W"), "F4")
@@ -301,7 +301,7 @@ describe Bishop do
       expect(bishop.legalMoves(chessboard)).to contain_exactly()
     end
     
-    it 'should return legal cells when in middle of board surrounded by different colured pieces on he board' do
+    it 'should return legal cells when in middle of board surrounded by different colured pieces on the board' do
       chessboard.place(bishop, "E5")
       chessboard.place(Knight.new("B"), "F6")
       chessboard.place(Knight.new("B"), "F4")

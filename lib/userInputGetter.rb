@@ -12,7 +12,7 @@ class UserInputGetter
           raise InvalidValueError unless allowedValues.map{|i|String(i)}.include?(val)
         end
         if board != nil
-          board.checkPosition(val)
+          board.getPositionCoords(val)
         end
         return val
       rescue InvalidValueError

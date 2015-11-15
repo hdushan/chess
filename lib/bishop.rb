@@ -55,4 +55,5 @@ class Bishop < ChessPiece
     ranks.reverse!
     getCells(board, files, ranks)
   end
+
 end
