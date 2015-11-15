@@ -4,7 +4,7 @@ Chess
 A console chess application.
 
 
-####Prerequisites: 
+####Prerequisites
 
 (just google them to find installers):
 
@@ -13,7 +13,7 @@ A console chess application.
 3. bundler gem
 
 
-####To set up the project on your machine:
+####To set up the project on your machine
 
 1. `git clone https://github.com/hdushan/chess.git`
 2. `bundle install`
@@ -26,12 +26,13 @@ A console chess application.
 - `\spec` *this is where unit tests are*
 
 
-####Run Unit tests:
+####Run Unit tests
 
-- `rake unit` *runs unit tests*
-Once tests complete, coverage report is created at coverage/index.html
+- `rake unit` or just `rake` *runs unit tests*
+
+Once tests complete, coverage report is created and placed at coverage/index.html
 
 
-####Run the application from command line:
+####Run the application from command line
 
 - `ruby chess.rb`

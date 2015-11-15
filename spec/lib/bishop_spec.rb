@@ -7,16 +7,16 @@ describe Bishop do
   describe '#initilialize' do
     let(:bishop) {Bishop.new("w")}
     let(:chessboard) {ChessBoard.new}
-    
+
     it 'should be inactive when created' do
       expect(bishop.active?).to be false
     end
-    
+
     it 'should be active when successfuly placed' do
       chessboard.place(bishop, "A1")
       expect(bishop.active?).to be true
     end
-    
+
     it 'should remain inactive if placing was not sucessful' do
       knight = Knight.new("W")
       chessboard.place(knight, "A1")
@@ -24,20 +24,20 @@ describe Bishop do
       expect(bishop.active?).to be false
       expect(knight.active?).to be true
     end
-    
+
     it 'should become inactive when killed' do
       chessboard.place(bishop, "A1")
       expect(bishop.active?).to be true
       chessboard.killPiece(bishop)
       expect(bishop.active?).to be false
     end
-    
+
   end
-  
+
   describe '#right_up_cells' do
     let(:bishop) {Bishop.new("w")}
     let(:chessboard) {ChessBoard.new}
-    
+
     it 'should return right up cells when in middle of board' do
       chessboard.place(bishop, "E5")
       expect(bishop.right_up_cells(chessboard)).to contain_exactly("F6", "G7", "H8")
@@ -49,21 +49,21 @@ describe Bishop do
       chessboard.place(knight, "G7")
       expect(bishop.right_up_cells(chessboard)).to contain_exactly("F6")
     end
-    
+
     it 'should return right up cells when in middle of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "E5")
       knight = Knight.new("B")
       chessboard.place(knight, "G7")
       expect(bishop.right_up_cells(chessboard)).to contain_exactly("F6", "G7")
     end
-    
+
     it 'should return right up cells when in middle of board if there is a same colored piece on the way in the next spot' do
       chessboard.place(bishop, "E5")
       knight = Knight.new("w")
       chessboard.place(knight, "F6")
       expect(bishop.right_up_cells(chessboard)).to contain_exactly()
     end
-    
+
     it 'should return right up cells when in middle of board if there is a different colored piece on the way in the next spot' do
       chessboard.place(bishop, "E5")
       knight = Knight.new("B")
@@ -82,7 +82,7 @@ describe Bishop do
       chessboard.place(knight, "E5")
       expect(bishop.right_up_cells(chessboard)).to contain_exactly("B2", "C3", "D4")
     end
-    
+
     it 'should return right up cells when in left bottom corner of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "A1")
       knight = Knight.new("B")
@@ -105,7 +105,7 @@ describe Bishop do
       expect(bishop.right_up_cells(chessboard)).to contain_exactly()
     end
   end
-  
+
   describe '#right_down_cells' do
     let(:bishop) {Bishop.new("w")}
     let(:chessboard) {ChessBoard.new}
@@ -121,7 +121,7 @@ describe Bishop do
       chessboard.place(knight, "H2")
       expect(bishop.right_down_cells(chessboard)).to contain_exactly("F4", "G3")
     end
-    
+
     it 'should return right down cells when in middle of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "E5")
       knight = Knight.new("B")
@@ -145,7 +145,7 @@ describe Bishop do
       chessboard.place(knight, "E4")
       expect(bishop.right_down_cells(chessboard)).to contain_exactly("B7", "C6", "D5")
     end
-    
+
     it 'should return right down cells when in left top corner of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "A8")
       knight = Knight.new("B")
@@ -179,7 +179,7 @@ describe Bishop do
       chessboard.place(knight, "C7")
       expect(bishop.left_up_cells(chessboard)).to contain_exactly("D6")
     end
-    
+
     it 'should return left up cells when in middle of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "E5")
       knight = Knight.new("B")
@@ -208,7 +208,7 @@ describe Bishop do
       chessboard.place(knight, "E4")
       expect(bishop.left_up_cells(chessboard)).to contain_exactly("G2", "F3")
     end
-    
+
     it 'should return left up cells when in right bottom corner of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "H1")
       knight = Knight.new("B")
@@ -237,7 +237,7 @@ describe Bishop do
       chessboard.place(knight, "A1")
       expect(bishop.left_down_cells(chessboard)).to contain_exactly("D4", "C3", "B2")
     end
-    
+
     it 'should return left down cells when in middle of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "E5")
       knight = Knight.new("B")
@@ -271,7 +271,7 @@ describe Bishop do
       chessboard.place(knight, "F6")
       expect(bishop.left_down_cells(chessboard)).to contain_exactly("G7")
     end
-    
+
     it 'should return left down cells when in right top corner of board if there is a different colored piece on the way' do
       chessboard.place(bishop, "H8")
       knight = Knight.new("B")
@@ -284,14 +284,39 @@ describe Bishop do
   describe '#legalMoves' do
     let(:bishop) {Bishop.new("w")}
     let(:chessboard) {ChessBoard.new}
+    
+    it 'should return right cells in the example mentioned in the exercise' do
+      chessboard.place(bishop, "E3")
+      expect(bishop.legalMoves(chessboard)).to contain_exactly("A7", "B6", "C1", "C5", "D2", "D4", "F2", "F4", "G1", "G5", "H6")
+    end
+
+    it 'should return right cells in the first multiple-piece example mentioned in the exercise' do
+      chessboard.place(bishop, "G5")
+      knight = Knight.new("W")
+      chessboard.place(knight, "F6")
+      expect(bishop.legalMoves(chessboard)).to contain_exactly("C1", "D2", "E3", "F4", "H4", "H6")
+      expect(knight.legalMoves(chessboard)).to contain_exactly("D5", "D7", "E4", "E8", "G4", "G8", "H5", "H7")
+    end
+    
+    it 'should return right cells in the second multiple-piece example mentioned in the exercise' do
+      bishop_1 = Bishop.new("B")
+      chessboard.place(bishop_1, "D1")
+      knight_1 = Knight.new("B")
+      chessboard.place(knight_1, "E2")
+      knight_2 = Knight.new("W")
+      chessboard.place(knight_2, "B3")
+      expect(bishop_1.legalMoves(chessboard)).to contain_exactly("B3", "C2")
+      expect(knight_1.legalMoves(chessboard)).to contain_exactly("C1", "C3", "D4", "F4", "G1", "G3")
+      expect(knight_2.legalMoves(chessboard)).to contain_exactly("A1", "A5", "C1", "C5", "D2", "D4")
+    end
 
     it 'should return legal cells when in middle of board with no other pieces on the board' do
       chessboard.place(bishop, "E5")
-      expect(bishop.legalMoves(chessboard)).to contain_exactly("A1", "B2", "C3", "D4", "F6", 
-                                                               "G7", "H8", "D6", "C7", "B8", 
+      expect(bishop.legalMoves(chessboard)).to contain_exactly("A1", "B2", "C3", "D4", "F6",
+                                                               "G7", "H8", "D6", "C7", "B8",
                                                                "F4", "G3", "H2")
     end
-    
+
     it 'should return legal cells when in middle of board surrounded by same colured pieces on the board' do
       chessboard.place(bishop, "E5")
       chessboard.place(Knight.new("W"), "F6")
@@ -300,7 +325,7 @@ describe Bishop do
       chessboard.place(Knight.new("W"), "D4")
       expect(bishop.legalMoves(chessboard)).to contain_exactly()
     end
-    
+
     it 'should return legal cells when in middle of board surrounded by different colured pieces on the board' do
       chessboard.place(bishop, "E5")
       chessboard.place(Knight.new("B"), "F6")

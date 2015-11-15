@@ -1,5 +1,4 @@
 $: << './lib'
-$: << '../lib'
 require 'userInputGetter'
 require 'chessBoard'
 require 'chessPiece'
@@ -37,10 +36,8 @@ class Chess
     when ChessPiece.allowedTypes[:Bishop]
       piece = Bishop.new(color)
     end
-    #print "\nInitialised %s in color %s\n"%[piece.pieceType, piece.color]
     position = UserInputGetter.getPosition(@board)
     @board.place(piece, position)
-    #print "\nType: %s, Color %s, placed at file %s, rank %s\n"%[piece.pieceType, piece.color, piece.file, piece.rank]
     return piece
   end
 end

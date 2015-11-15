@@ -389,6 +389,11 @@ describe Knight do
   describe '#legalMoves' do
     let(:knight) {Knight.new("w")}
     let(:chessboard) {ChessBoard.new}
+    
+    it 'should return right cells in the example mentioned in the exercise' do
+      chessboard.place(knight, "D5")
+      expect(knight.legalMoves(chessboard)).to contain_exactly("B4", "B6", "C3", "C7", "E3", "E7", "F4", "F6")
+    end
 
     it 'should return legal cells when in middle of board with no other pieces on the board' do
       chessboard.place(knight, "E5")
